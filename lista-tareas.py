@@ -33,6 +33,10 @@ class TaskManager:
         self.clear_button = tk.Button(button_frame, text="Limpiar Tareas", command=self.clear_tasks, width=20)
         self.clear_button.grid(row=1, column=1, padx=5, pady=5)  # Coloca el botón en la cuadrícula
 
+        #Boton de busqueda-- Sara lamprea
+        self.search_button = tk.Button(button_frame, text="Buscar Tarea", command=self.search_task, width=20)
+        self.search_button.grid(row=2, column=0, padx=5, pady=5)
+
     def add_task(self):
         # Método para agregar una nueva tarea
         task = simpledialog.askstring("Agregar Tarea", "Escribe la tarea:")  # Solicita al usuario la tarea
@@ -75,8 +79,19 @@ class TaskManager:
         for task in self.tasks:
             self.task_listbox.insert(tk.END, task)  # Inserta cada tarea en el Listbox
 
+        
+    #añado funcion search_task
+    def search_task(self):
+        search_term = simpledialog.askstring("Buscar Tarea", "Ingresa el término de búsqueda:")
+        if search_term:
+            found_tasks = [task for task in self.tasks if search_term.lower() in task.lower()]
+            messagebox.showinfo("Resultados de Búsqueda", "\n".join(found_tasks) if found_tasks
+        else "No se encontraron tareas.")
+
 # Bloque principal para ejecutar la aplicación
 if __name__ == "__main__":
     root = tk.Tk()  # Crea la ventana principal
     app = TaskManager(root)  # Crea una instancia de TaskManager
     root.mainloop()  # Inicia el bucle principal de la interfaz gráfica
+
+
