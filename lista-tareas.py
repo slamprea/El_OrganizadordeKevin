@@ -60,9 +60,12 @@ class TaskManager:
     def delete_task(self):
         # Método para eliminar la tarea seleccionada
         try:
-            selected_index = self.task_listbox.curselection()[0]  # Obtiene el índice de la tarea seleccionada
-            del self.tasks[selected_index]  # Elimina la tarea de la lista
-            self.update_task_listbox()  # Actualiza el Listbox
+            selected_index = self.task_listbox.curselection()[0]
+            task = self.tasks[selected_index]
+            if messagebox.askyesno("Confirmación de Eliminación", f"¿Estás seguro de que deseas
+            eliminar esta tarea '{task}'?"):
+             del self.tasks[selected_index]
+            self.update_task_listbox()
         except IndexError:
             # Muestra una advertencia si no hay ninguna tarea seleccionada
             messagebox.showwarning("Advertencia", "Selecciona una tarea para eliminar.")
