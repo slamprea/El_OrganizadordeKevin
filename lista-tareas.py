@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox, simpledialog
+from datetime import datetime #agrego libreria datetime--Kevin
 
 class TaskManager:
     def __init__(self, root):
@@ -38,12 +39,11 @@ class TaskManager:
         self.search_button.grid(row=2, column=0, padx=5, pady=5)
 
     def add_task(self):
-        # Método para agregar una nueva tarea
-        task = simpledialog.askstring("Agregar Tarea", "Escribe la tarea:")  # Solicita al usuario la tarea
-        if task:  # Verifica si se ingresó una tarea
-            self.tasks.append(task)  # Agrega la tarea a la lista
-            self.update_task_listbox()  # Actualiza el Listbox para mostrar la nueva tarea
-
+        task = simpledialog.askstring("Agregar Tarea", "Escribe la tarea:")
+        if task:
+            date_created = datetime.now().strftime("%d/%m/%Y %H:%M")
+            self.tasks.append(f"{task} (creado el {date_created})")
+            self.update_task_listbox()
     def update_task(self):
         # Método para actualizar la tarea seleccionada
         try:
